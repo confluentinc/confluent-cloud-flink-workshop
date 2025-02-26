@@ -1,6 +1,11 @@
 ![image](img/confluent-logo-300-2.png)
 # Lab 2
-Finishing Lab 1 is required for Lab 2. If you have not completed it, go back to [Lab 1](lab1.md).
+
+In this Lab (Lab2), we will dive into more advanced features of Flink. We will use different types of joins to create few **Data Products**. First, we will filter out orders that do not have valid payments. Additionally, we will calculate customer **Promotions** and **Loyalty levels**.
+
+Finishing Lab 1 is required for Lab 2. If you have not completed it, go back to [Lab 1](lab1.md). Below is the architecture of this lab. The dimmed part should have been created in Lab1.
+
+![image](img/architecture_lab2.png)
 
 
 [1. Flink Joins](lab2.md#1-Flink-joins)
@@ -64,6 +69,8 @@ Notice that whenever a customer updates their email, previous orders remain unch
 
 Interval joins are particularly useful when working with unbounded data streams. In our use case, an order is considered valid only if a corresponding payment is received. Since payments always occur after an order is placed, interval joins allow us to efficiently match orders with their respective payments based on time constraints.
 
+![image](img/architecture_validorders.png)
+
 Create a new table that will hold valid orders.
 
 ```sql
@@ -93,6 +100,8 @@ SELECT * FROM valid_orders;
 We will now use `valid_orders` for the rest of the workshop.
 
 ### 2. Data Enrichment
+
+![image](img/architecture_temporaljoin.png)
  
 We will join data from: Valid Orders, Customer, Product tables together in a single SQL statement. And insert them into a new data product: `order_customer_product`
 
@@ -136,6 +145,8 @@ Congratulions on building your first data product. Now we enriched valid orders 
 
 ### 3. Promotions Calculation
 #### **[ADVANCED]**
+
+![image](img/architecture_promotioncalc.png)
 
 We want to run special electronics promotion. Customers that have purchased electronics from us migh be eligible for this promotion. Let's find out if there are any eligible customers.
 
@@ -199,6 +210,8 @@ The two topics highlighted represent data products that can be used by other tea
 
 ### 5. Loyalty Levels Calculation
 #### **[ADVANCED]**
+
+![image](img/architecture_loyalty.png)
 
 Now, we are ready to calculate loyalty levels for our customers.
 

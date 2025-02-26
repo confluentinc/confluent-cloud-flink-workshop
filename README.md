@@ -1,6 +1,11 @@
-# Flink CC Demo 
+# Flink Confluent Cloud for Apache Flink Online Store Workshop
 
-This repository contains infrastructure-as-code and code for https://confluentinc.atlassian.net/wiki/spaces/FLINK/pages/3351249309/Flink+on+Confluent+Cloud+-+Product+Demo.
+This repository sets up the necessary infrastructure for the Confluent Cloud: Getting Started with Apache Flink workshop. It simulates data for a third-party reseller offering products from major vendors like Amazon and Walmart.
+
+During the workshop, you'll use Confluent Cloud for Apache Flink to clean, transform, and join the data, ultimately creating several data products. Below is the architecture of what you'll build.
+
+![image](flink-getting-started/img/architecture.png)
+
 
 ## General Requirements
 

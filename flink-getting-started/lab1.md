@@ -1,9 +1,13 @@
 ![image](img/confluent-logo-300-2.png)
 # Lab 1
 
-This lab focuses on a third-party reseller that offers products from well-known vendors like Amazon and Walmart. In this lab, we will explore the various data sources available and begin building ad-hoc queries to aggregate the data.
+This lab focuses on a third-party reseller that offers products from well-known vendors like Amazon and Walmart. In this lab, we will explore the various data sources available and begin building ad-hoc queries to aggregate the data. We will create our first data product by deduplicating `orders` data.
 
 In Lab 2, we will dive into more advanced features of Flink and create few **Data Products** on **Promotions** and **Loyalty levels**.
+
+The below is the full architecture of what we will build in both labs.
+
+![image](img/architecture.png)
 
 ## Prerequisites
 
@@ -215,7 +219,7 @@ SELECT order_id, product_id, customer_id, $rowtime AS order_timestamp
 ```
 
 ### 5. Deduplication
-
+![image](img/architecture_uniqueorders.png)
 Let’s take a closer look at the orders. 
 
 ```sql
