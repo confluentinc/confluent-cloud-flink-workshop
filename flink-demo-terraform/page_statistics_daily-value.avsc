@@ -1,0 +1,34 @@
+{
+  "fields": [
+    {
+      "name": "window_time",
+      "type": {
+        "logicalType": "timestamp-millis",
+        "type": "long"
+      }
+    },
+    {
+      "default": null,
+      "name": "url",
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "default": null,
+      "name": "avg_view_time",
+      "type": [
+        "null",
+        "int"
+      ]
+    },
+    {
+      "name": "unique_users",
+      "type": "long"
+    }
+  ],
+  "name": "record",
+  "namespace": "org.apache.flink.avro.generated",
+  "type": "record"
+}

@@ -1,0 +1,30 @@
+#####################################################################
+# Confluent Cloud Connection Configuration                          #
+#                                                                   #
+# Note: The plugin supports different ways of passing parameters:   #
+# - Programmatically                                                #
+# - Via global environment variables                                #
+# - Via arguments in the main() method                              #
+# - Via properties file                                             #
+#                                                                   #
+# For all cases, use the ConfluentSettings class to get started.    #
+#                                                                   #
+# The project is preconfigured with this properties file.           #
+#####################################################################
+
+# Cloud region
+client.cloud=aws
+client.region=us-west-2
+
+# Access & compute resources
+client.flink-api-key=
+client.flink-api-secret=
+client.organization-id=
+client.environment-id=
+client.compute-pool-id=
+
+# User or service account
+client.principal-id=
+
+# Required if requests are proxied
+client.rest-endpoint=confluent.cloud
