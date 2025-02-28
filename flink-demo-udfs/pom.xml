@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <kafkaconnect.version>2.8.2</kafkaconnect.version>
+        <kafkaconnect.version>3.9.0</kafkaconnect.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
