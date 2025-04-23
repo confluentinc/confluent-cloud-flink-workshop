@@ -148,7 +148,7 @@ Congratulions on building your first data product. Now we enriched valid orders 
 
 ![image](img/architecture_promotioncalc.png)
 
-We want to run special electronics promotion. Customers that have purchased electronics from us migh be eligible for this promotion. Let's find out if there are any eligible customers.
+We want to run special electronics promotion. Customers that have purchased electronics from us might be eligible for this promotion. Let's find out if there are any eligible customers.
 
 Find which customers have ordered electronincs brands in large volumes.
 ```sql
@@ -281,7 +281,13 @@ SELECT * FROM reward_levels;
 
 That is the second use-case built on top of the another data product, `valid_orders`.
 
-## End of Lab2.
+
+
+
+## Tableflow
+🌊 ➡️ 🧊 🪣
+To learn how these topics can be materialized into Apache Iceberg tables, continue on with the [next lab (Lab 3) on Tableflow](../tableflow-labs/lab1.md).
+
 
 # If you don't need your infrastructure anymore, do not forget to delete the resources!
 Go to [destroy lab](../README.md#tear-down)

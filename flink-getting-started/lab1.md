@@ -60,7 +60,7 @@ Confluent Cloud Flink Compute Pool is a managed environment that provides the re
 
 With Compute Pools, you don't need to manually size your workload. Simply select the maximum number of Confluent Flink Units (CFUs), and Confluent will automatically scale your resources. You are only charged for the CFUs consumed by your queries.
 
-In [Flink UI](https://confluent.cloud/go/flink), choose the Environemnt and check if there are two pools created:
+In [Flink UI](https://confluent.cloud/go/flink), choose the Environment and check if there are two pools created:
 
 - **`data-generation`**: Contains the Flink statements used to generate the lab data.  
 - **`default`**: the pool we will use to run the ad-hoc queries in this lab.
@@ -426,7 +426,7 @@ FROM TABLE(
    TUMBLE(TABLE unique_orders, DESCRIPTOR(`$rowtime`), INTERVAL '1' MINUTES))
 GROUP BY window_start, window_end, window_time;
 ```
-In a window operation, we should alway `GROUP BY` `window_start`, `window_end` and `window_time` (defines the rowtime column of the resulting table).
+In a window operation, we should always `GROUP BY` `window_start`, `window_end` and `window_time` (defines the rowtime column of the resulting table).
 
 Find the amount of orders for ten minute intervals advanced by five minutes (hopping window aggregation).
 
