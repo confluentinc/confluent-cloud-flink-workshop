@@ -1,3 +1,5 @@
+TODO: Add Images and Walk Through
+
 # Lab 4: Integrate Tableflow with AWS Glue Catalog and Query with Athena
 
 This lab guides you through configuring AWS Glue Data Catalog as the external catalog for your Tableflow setup, and then querying the resulting Iceberg tables using AWS Athena. This allows the metadata of the Iceberg tables created by Tableflow in S3 to be automatically published to AWS Glue, making them easily queryable via standard SQL in Athena.

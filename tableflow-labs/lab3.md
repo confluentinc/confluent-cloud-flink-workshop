@@ -1,5 +1,16 @@
 # Lab 3: Configure AWS and Enable Tableflow
 
+**Introduction**
+
+Getting data from real-time operational systems like Apache Kafka into formats ready for analytics often requires complex tooling and custom pipelines. Confluent Tableflow simplifies this process dramatically. It's a feature within Confluent Cloud designed to easily materialize your Kafka topic data directly into open table formats like Apache Iceberg or Delta Lake, stored in cloud object storage such as Amazon S3. This avoids the need for separate ETL jobs or custom connectors, bridging the gap between streaming data and analytical systems. Tableflow automatically handles details like schema evolution and data compaction, making your Kafka data readily available and performant for query engines like AWS Athena or Snowflake.
+
+In this lab, you will learn how to set up the foundational components required to use Tableflow with your own AWS storage. Specifically, you will:
+
+* Create the necessary AWS resources: an S3 bucket for storage, an IAM policy defining permissions, and an IAM role for secure access.
+* Configure the secure connection (Provider Integration) between your Confluent Cloud environment and your AWS account.
+* Enable Tableflow on your existing Kafka topics to begin syncing data to your S3 bucket as Iceberg tables.
+
+
 This lab guides you through setting up the necessary AWS resources (S3 Bucket, IAM Policy, IAM Role), configuring the Confluent Cloud Tableflow Provider Integration, and finally, enabling Tableflow on your Kafka topics. This allows Tableflow to securely write Kafka topic data into your own S3 bucket as Apache Iceberg tables.
 
 **Prerequisites:**
