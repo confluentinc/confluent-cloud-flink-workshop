@@ -162,3 +162,74 @@ Once the tables appear in AWS Glue, you can query them using Athena.
 ---
 
 You have now successfully integrated Tableflow with your AWS Glue Data Catalog using a separate Provider Integration and queried the automatically created Iceberg tables using AWS Athena.
+
+
+--- 
+
+# If you don't need your infrastructure anymore, do not forget to delete the resources!
+
+---
+
+## Empty and Delete the Amazon S3 Bucket
+
+If you no longer need the S3 bucket created during **Lab 3**, follow these steps to empty and delete it:
+
+1. **Empty the Bucket:**
+    - Navigate to the **Amazon S3** service in your AWS Management Console.
+    - Locate the bucket you created for Tableflow (e.g., `your-tableflow-bucket-name`).
+    - Click on the bucket name to open it.
+    - Select all objects and folders within the bucket.
+    - Click **Delete** and confirm the deletion.
+
+2. **Delete the Bucket:**
+    - Return to the **Amazon S3** service.
+    - Select the bucket you just emptied.
+    - Click **Delete**.
+    - Confirm the bucket name and click **Delete bucket**.
+
+**Important:** Ensure that no other services or applications are using this bucket before deleting it.
+
+----
+
+
+## Delete IAM Policies and Roles
+
+If you no longer need the IAM policies and roles created during **Lab 3** and **Lab 4**, follow these steps to delete them:
+
+### Delete IAM Policies
+
+1. **Navigate to the IAM Policies:**
+    - In your **AWS Management Console**, go to the **IAM** service.
+    - Click on **Policies** in the left-hand menu.
+
+2. **Locate and Delete Policies:**
+    - Search for the policies you created, such as:
+        - `tableflow-s3-access-policy` (created in Lab 3)
+        - `tableflow-glue-access-policy` (created in Lab 4)
+    - Select each policy and click **Delete**.
+    - Confirm the deletion.
+
+**Note:** Ensure that no other roles or users are attached to these policies before deleting them.
+
+---
+
+### Delete IAM Roles
+
+1. **Navigate to the IAM Roles:**
+    - In your **AWS Management Console**, go to the **IAM** service.
+    - Click on **Roles** in the left-hand menu.
+
+2. **Locate and Delete Roles:**
+    - Search for the roles you created, such as:
+        - `quickstart-tableflow-assume-role` (created in Lab 3)
+        - `quickstart-tableflow-glue-assume-role` (created in Lab 4)
+    - Select each role and click **Delete role**.
+    - Confirm the deletion.
+
+**Important:** Ensure that these roles are no longer in use by any services or applications before deleting them.
+
+---
+
+By completing these steps, you will have successfully cleaned up the IAM policies and roles created during the labs.
+---
+Go to [destroy lab](../README.md#tear-down) to delete your Confluent infrastructure as well.
