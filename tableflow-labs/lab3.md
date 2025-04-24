@@ -170,6 +170,9 @@ With the Provider Integration successfully configured, you can now enable Tablef
     * Find the specific topic you want to enable Tableflow for in the list (e.g., `clicks`, `customer_inquiries`, `orders`, etc.).
     * On the right-hand side of the row for that topic, in the "Tableflow" column, click the **Enable Tableflow** button/link.
 
+
+  * ⚠️ Note: As of April 2025, Upsert Topics are not supported on Tableflow. This excludes the following topics from the lab, which you should not enable: `customers`, `electronics_promotions`, `order_customer_product`, `order_status`, and `products`. 
+
 ![Click Enable Tableflow](img/click-enable-tableflow.png)
 
 3.  **Configure Storage:**
