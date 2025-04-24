@@ -52,7 +52,7 @@ Now, let's start the process in Confluent Cloud to connect to the S3 bucket.
 6.  On the "Create Permission Policy in AWS" screen, ensure **Tableflow S3 Bucket** is selected (or similar option representing S3 access).
 7.  **IMPORTANT:** Confluent Cloud will display a JSON permissions policy. **Copy this `permissions-policy.json`**. You will need it in the next step to create the IAM policy in AWS. Keep this Confluent Cloud wizard page open.
 
-![copy permissions policy](copy-permissions-policy.png)
+![copy permissions policy](img/copy-permissions-policy.png)
 
 ---
 
