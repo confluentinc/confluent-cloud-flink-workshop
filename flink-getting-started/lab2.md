@@ -284,10 +284,14 @@ That is the second use-case built on top of the another data product, `valid_ord
 
 
 
-## Tableflow
+## Tableflow Labs
 🌊 ➡️ 🧊 🪣
-To learn how these topics can be materialized into Apache Iceberg tables, continue on with the [next lab (Lab 3) on Tableflow](../tableflow-labs/lab1.md).
 
+To learn how these topics can be materialized into Apache Iceberg tables, continue on with the [next lab (Lab 3) on Tableflow](../tableflow-labs/lab3.md).
+
+Click [here](../tableflow-labs/lab3.md) to start Lab 3.
+
+---
 
 # If you don't need your infrastructure anymore, do not forget to delete the resources!
 Go to [destroy lab](../README.md#tear-down)
