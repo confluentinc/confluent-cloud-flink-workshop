@@ -109,29 +109,30 @@ Use CTAS to create a new table for `Order <-> Customer <-> Product` join results
 
 ```sql
 SET 'client.statement-name' = 'valid-orders-customer-product-materializer';
-CREATE TABLE order_customer_product(
+
+CREATE TABLE order_customer_product
+(
   order_id STRING,
   customer_id INT,
   name STRING,
   email STRING,
   brand STRING,
   product STRING,
-  sale_price DOUBLE
-)WITH (
-    'changelog.mode' = 'retract'
-)AS SELECT
-  valid_orders.order_id,
-  valid_orders.customer_id,
-  customers.name,
-  customers.email,
-  products.brand,
-  products.name AS product,
-  valid_orders.amount
+  sale_price DOUBLE)
+WITH ('changelog.mode' = 'retract')
+AS
+SELECT valid_orders.order_id,
+       valid_orders.customer_id,
+       customers.name,
+       customers.email,
+       products.brand,
+       products.name AS product,
+       valid_orders.amount AS sale_price
 FROM valid_orders
-  INNER JOIN customers FOR SYSTEM_TIME AS OF valid_orders.order_time
-    ON valid_orders.customer_id = customers.customer_id
-  INNER JOIN products FOR SYSTEM_TIME AS OF valid_orders.order_time
-    ON valid_orders.product_id = products.product_id;
+INNER JOIN customers
+FOR SYSTEM_TIME AS OF valid_orders.order_time ON valid_orders.customer_id = customers.customer_id
+INNER JOIN products
+FOR SYSTEM_TIME AS OF valid_orders.order_time ON valid_orders.product_id = products.product_id;
 ```
 
 In this case, we used a temporal join to associate valid orders (orders with a successful payment) with product and customer information at the time the order was placed. A regular join is not suitable here because it would generate a new output for all orders every time the customer or product information changes. Since we are only interested in the product and customer details as they were at the time of the order, temporal joins are the ideal solution.

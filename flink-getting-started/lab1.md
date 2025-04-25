@@ -293,18 +293,25 @@ Now let's check the `unique_orders` table definition
 SHOW CREATE TABLE unique_orders;
 ```
 
-![image](img/create_table_unique_orders.png)
+![alt text](img/create_table_unique_orders.png)
 
-Changelog mode `upsert` means that the messages in the underlying Kafka topic are interpreted as `upserts` based on the message's key. For a given Kafka message if no row with the same key exists, it's an insertion. If a row with the same key already exists, its an update.
+## Understanding the `unique_orders` Table Definition
 
-Here's Flink was not smart enough to infer, that `unique_orders` in reality never receives any updates. We will therefore explicitly configure `unique_orders` to be append only. This will allow additional query types downstream, because some SQL operators do not support updating tables as inputs.
+As you can see from the `CREATE TABLE` statement, the `unique_orders` table is derived from the `orders` table using a specific transformation. This transformation employs a `ROW_NUMBER()` window function, partitioned by `order_id` and ordered by the `$rowtime` in ascending order. The subsequent `WHERE rownum = 1` clause filters the results to retain only the very first event observed for each unique `order_id` based on its timestamp.
 
+Consequently, the resulting `unique_orders` table operates with an `append` changelog mode. This behavior arises directly from the data processing logic:
 
-```sql
-ALTER TABLE `unique_orders` SET ('changelog.mode' = 'append');
-```
+* **First Event Capture:** The query is designed to identify and persist only the earliest record for each `order_id` encountered in the `orders` stream.
 
-* `append` mode means only new rows (inserts) are added to the table. There are no updates or deletes processed.
+* **No Subsequent Updates:** Once the initial record for an `order_id` is written to the `unique_orders` table, any subsequent events pertaining to the same `order_id` are effectively discarded by the `WHERE rownum = 1` filter. These later events, even if they contain different attribute values, do not trigger an update to the existing record in `unique_orders`.
+
+* **Insert-Only Semantics:** The transformation logic ensures that only new, distinct `order_id` records are ever inserted into the `unique_orders` table. There is no mechanism within this query to generate update or delete operations for records that have already been processed.
+
+With this configuration, we are essentially stating that "whenever the first `order_id` comes in, that's the one that we're emitting and keeping that forever." Even if the underlying `orders` table has a primary key defined, the transformation applied here dictates that the `unique_orders` table will only ever grow by appending new, unique `order_id` entries.
+
+In contrast, an `upsert` mode would imply the possibility of updating existing records based on a key, and a `retract` mode would involve emitting messages to both add and remove records. The current query, by its design of selecting only the initial event for each key, inherently leads to an append-only behavior in the output table.
+
+Therefore, the `append` changelog mode for the `unique_orders` table is a direct and logical consequence of the "first seen wins" deduplication strategy implemented in its defining query.
 
 
 > NOTE: You can find more information about changelog mode [here.](https://docs.confluent.io/cloud/current/flink/concepts/dynamic-tables.html#changelog-entries)
@@ -333,42 +340,48 @@ WHERE rownum = 1;
 The output should look similar to this:
 
 ```
+Copy
 == Physical Plan ==
 
-StreamPhysicalSink [6]
-  +- StreamPhysicalCalc [5]
-    +- StreamPhysicalRank [4]
-      +- StreamPhysicalExchange [3]
-        +- StreamPhysicalCalc [2]
-          +- StreamPhysicalTableSourceScan [1]
+StreamSink [6]
+  +- StreamCalc [5]
+    +- StreamRank [4]
+      +- StreamExchange [3]
+        +- StreamCalc [2]
+          +- StreamTableSourceScan [1]
 
 == Physical Details ==
 
-[1] StreamPhysicalTableSourceScan
-Table: `az-prod-a4b5d3df`.`marketplace`.`orders`
+[1] StreamTableSourceScan
+Table: `jb-prod-e4d5dd72`.`marketplace`.`orders`
 Primary key: (order_id)
+Changelog mode: append
 Upsert key: (order_id)
 State size: low
+Startup mode: earliest-offset
 
-[2] StreamPhysicalCalc
+[2] StreamCalc
+Changelog mode: append
 Upsert key: (order_id)
 
-[3] StreamPhysicalExchange
+[3] StreamExchange
+Changelog mode: append
 Upsert key: (order_id)
 
-[4] StreamPhysicalRank
-Changelog mode: upsert
+[4] StreamRank
+Changelog mode: append
 Upsert key: (order_id)
 State size: medium
+State TTL: never
 
-[5] StreamPhysicalCalc
-Changelog mode: upsert
+[5] StreamCalc
+Changelog mode: append
 Upsert key: (order_id)
 
-[6] StreamPhysicalSink
-Table: `az-prod-a4b5d3df`.`marketplace`.`unique_orders`
+[6] StreamSink
+Table: `jb-prod-e4d5dd72`.`marketplace`.`unique_orders`
 Primary key: (order_id)
-Changelog mode: upsert
+Changelog mode: append
 Upsert key: (order_id)
 State size: low
 ```
