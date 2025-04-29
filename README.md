@@ -6,6 +6,9 @@ During the workshop, you'll use Confluent Cloud for Apache Flink to clean, trans
 
 ![image](flink-getting-started/img/architecture.png)
 
+In labs 3 and 4, you will then sync these data products to Amazon S3 in Apache Iceberg format using Tableflow. Below is the architecture:
+
+![lab 3 and 4 architecture](tableflow-labs/img/lab-3-and-4-architecture.png)
 
 ## General Requirements
 
