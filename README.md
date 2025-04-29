@@ -4,7 +4,7 @@ This repository sets up the necessary infrastructure for the Confluent Cloud: Ge
 
 During the workshop, you'll use Confluent Cloud for Apache Flink to clean, transform, and join the data, ultimately creating several data products. Below is the architecture of what you'll build.
 
-![image](flink-getting-started/img/architecture.png)
+![lab 1 and 2 architecture](flink-getting-started/img/architecture_lab2.png)
 
 In labs 3 and 4, you will then sync these data products to Amazon S3 in Apache Iceberg format using Tableflow. Below is the architecture:
 
