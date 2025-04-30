@@ -1,10 +1,10 @@
-# Confluent Cloud Tableflow Workshop: Overview
+# Confluent Cloud Tableflow Labs: Overview
 
-Welcome to the Confluent Cloud Tableflow Workshop! This workshop is designed to guide you through the process of integrating Confluent Cloud's Tableflow feature with AWS services to seamlessly sync Kafka topic data into open table formats like Apache Iceberg, stored in Amazon S3, and queryable via AWS Athena.
+This set of labs is designed to guide you through the process of integrating Confluent Cloud's Tableflow feature with AWS services to seamlessly sync Kafka topic data into open table formats like Apache Iceberg, stored in Amazon S3, and queryable via AWS Athena.
 
 ## What You'll Learn
 
-This workshop is divided into multiple labs, each focusing on a specific aspect of the integration. Below is a summary of **Lab 3** and **Lab 4**, which are key to enabling Tableflow and querying data from tables.
+This section is divided into multiple labs, each focusing on a specific aspect of the integration. Below is a summary of **Lab 3** and **Lab 4**, which are key to enabling Tableflow and querying data from tables.
 
 ![Architecture](img/lab-3-and-4-architecture.png)
 
@@ -59,6 +59,6 @@ After completing the labs, remember to clean up your resources to avoid unnecess
 
 ## Next Steps
 
-- Start with [Lab 3: Configure AWS and Enable Tableflow](tableflow-labs/lab3.md).
-- Proceed to [Lab 4: Integrate Tableflow with AWS Glue Catalog and Query with Athena](tableflow-labs/lab4.md).
+- Start with [Lab 3: Configure AWS and Enable Tableflow](lab3.md).
+- Proceed to [Lab 4: Integrate Tableflow with AWS Glue Catalog and Query with Athena](lab4.md).
 
