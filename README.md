@@ -57,7 +57,7 @@ First, clone the repo and change directory to `demo-infrastructure`
 
 ```bash
 git clone <repo_url>
-cd flink-cc-demo/demo-infrastructure
+cd confluent-cloud-flink-workshop/demo-infrastructure
 ```
 
 In the `demo-infrastructure` directory, create a `terraform.tfvars` file to store the Confluent Cloud API keys required by Terraform. Replace the placeholders below with your own keys and `{prefix}` with your intials.
