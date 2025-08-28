@@ -1,3 +1,5 @@
+[![Try Confluent Cloud - The Data Streaming Platform](https://images.ctfassets.net/8vofjvai1hpv/10bgcSfn5MzmvS4nNqr94J/af43dd2336e3f9e0c0ca4feef4398f6f/confluent-banner-v2.svg)](https://confluent.cloud/signup?utm_source=github&utm_medium=banner&utm_campaign=oss-repos&utm_term=confluent-cloud-flink-workshop)
+
 # Flink Confluent Cloud for Apache Flink Online Store Workshop
 
 This repository sets up the necessary infrastructure for the Confluent Cloud: Getting Started with Apache Flink workshop. It simulates data for a third-party reseller offering products from major vendors like Amazon and Walmart.
