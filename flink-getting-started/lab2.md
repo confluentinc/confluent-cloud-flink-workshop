@@ -142,7 +142,7 @@ Verify that the data was joined successfully.
 SELECT * FROM order_customer_product;
 ```
 
-Congratulions on building your first data product. Now we enriched valid orders with customer (name and email) and product (brand) information.
+Congratulations on building your first data product. Now we enriched valid orders with customer (name and email) and product (brand) information.
 
 ### 3. Promotions Calculation
 #### **[ADVANCED]**
@@ -202,7 +202,7 @@ SELECT * from electronics_promotions;
 
 Congratulations on building your first use-case on top of our data product. Let's checkout what we have built.
 
-In the [Conflluent Cloud Cluster UI](https://confluent.cloud/go/clusters), choose the **Environment** and **Cluster**, then navigate to the left-hand pane and click on **Stream Lineage**.
+In the [Confluent Cloud Cluster UI](https://confluent.cloud/go/clusters), choose the **Environment** and **Cluster**, then navigate to the left-hand pane and click on **Stream Lineage**.
 
    ![Stream Lineage](./img/stream_lineage.png)
 
