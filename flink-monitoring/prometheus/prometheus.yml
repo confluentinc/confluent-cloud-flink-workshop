@@ -1,0 +1,21 @@
+scrape_configs:
+  - job_name: Confluent Cloud
+    scrape_interval: 1m
+    scrape_timeout: 1m
+    honor_timestamps: true
+    static_configs:
+      - targets:
+        - api.telemetry.confluent.cloud
+    scheme: https
+    basic_auth:
+      username: # Add your Confluent Cloud API Key here
+      password: # Add your Confluent Cloud API Secret here
+    metrics_path: /v2/metrics/cloud/export
+    params:
+      "resource.kafka.id":
+        - # Add your Kafka cluster ID here (from terraform output kafka_marketplace_id)
+      "resource.schema_registry.id":
+        - # Add your Schema Registry ID here (from terraform output sr_prod_id)
+      "resource.compute_pool.id":
+        - # Add your Flink compute pool ID here (from terraform output flink_compute_pool_id)
+        # Add additional compute pool IDs if you have multiple pools
