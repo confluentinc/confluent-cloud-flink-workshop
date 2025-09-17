@@ -18,14 +18,15 @@ In labs 3 and 4, you will then sync these data products to Amazon S3 in Apache I
 * **Terraform (v1.9.5+)** - The demo resources is automatically created using [Terraform](https://www.terraform.io).
 * **Git CLI** - Git CLI to clone the repo 
 * **Confluent CLI** - Confluent CLI if Flink shell will be used.
+* **Docker and Docker Compose** - Required if you want to run the optional Flink monitoring dashboard
 
 <details>
 <summary>Installing CLI tools on MAC</summary>
 
-Install `git` and `terraform` by running:
+Install `git`, `terraform`, and `docker` by running:
 
 ```bash
-brew install git terraform
+brew install git terraform docker docker-compose
 ```
 
 [Optional] Install `confluent` CLI by running:
@@ -40,11 +41,12 @@ brew install confluent
 <details>
 <summary>Installing CLI tools on Windows</summary>
 
-Install `git` and `terraform` by running:
+Install `git`, `terraform`, and `docker` by running:
 
 ```powershell
 winget install --id Git.Git -e
 winget install --id Hashicorp.Terraform -e
+winget install --id Docker.DockerDesktop -e
 ```
 [Optional] Install `confluent` CLI by running:
 ```
@@ -127,6 +129,12 @@ call env.bat
 ## Labs
 
 **Next Lab:** [Lab 1: Getting Started with Flink](./flink-getting-started/lab1.md)
+
+## Optional: Flink Monitoring Dashboard
+
+After completing the workshop setup, you can optionally set up a monitoring dashboard to visualize your Flink jobs and Confluent Cloud metrics:
+
+**Monitoring Setup:** [Flink Monitoring Dashboard](./flink-monitoring/README.md)
 
 
 
