@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -36,8 +36,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -49,7 +49,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -84,12 +85,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
-            "name": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "flink-workshop-prometheus"
           },
           "editorMode": "code",
           "expr": "count (group by (compute_pool_id) (confluent_flink_compute_pool_utilization_current_cfus))",
@@ -104,8 +105,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "description": "% utilization per compute pool, meaning the current CFU consumption divided by the compute pool limit",
       "fieldConfig": {
@@ -154,7 +155,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-green"
+                "color": "super-light-green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -186,12 +188,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
-            "name": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "flink-workshop-prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -212,8 +214,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -225,7 +227,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -260,7 +263,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "disableTextWrap": false,
@@ -279,8 +282,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -292,7 +295,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -323,7 +327,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "disableTextWrap": false,
@@ -355,8 +359,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -368,7 +372,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -475,12 +480,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
-            "name": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "flink-workshop-prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -488,9 +493,9 @@
           "expr": "count by(status) (confluent_flink_statement_status{compute_pool_id=~\"$compute_pools\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "instant": true,
+          "instant": false,
           "legendFormat": "__auto",
-          "range": false,
+          "range": true,
           "refId": "A",
           "useBackend": false
         }
@@ -500,8 +505,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -521,7 +526,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               }
             ]
           }
@@ -549,12 +555,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
-            "name": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "flink-workshop-prometheus"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -563,10 +569,10 @@
           "format": "table",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "__auto",
-          "range": false,
+          "range": true,
           "refId": "A",
           "useBackend": false
         }
@@ -593,8 +599,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -639,7 +645,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -746,12 +753,12 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.0",
+      "pluginVersion": "12.1.1",
       "targets": [
         {
           "datasource": {
-            "name": "prometheus",
-            "type": "prometheus"
+            "type": "prometheus",
+            "uid": "flink-workshop-prometheus"
           },
           "editorMode": "code",
           "expr": "count by (status) (confluent_flink_statement_status{compute_pool_id=~\"$compute_pools\"})",
@@ -779,8 +786,8 @@
     },
     {
       "datasource": {
-        "name": "prometheus",
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "flink-workshop-prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -881,14 +888,19 @@
   "templating": {
     "list": [
       {
-        "allValue": "",
         "current": {
-          "text": "All",
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
         },
-        "definition": "label_values(confluent_flink_compute_pool_utilization_cfu_limit,compute_pool_id)",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "flink-workshop-prometheus"
+        },
+        "definition": "label_values(compute_pool_id)",
         "includeAll": true,
         "label": "Compute Pool(s)",
         "multi": true,
@@ -896,7 +908,7 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(confluent_flink_compute_pool_utilization_cfu_limit,compute_pool_id)",
+          "query": "label_values(compute_pool_id)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
