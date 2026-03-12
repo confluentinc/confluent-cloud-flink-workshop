@@ -35,7 +35,7 @@ under the License.
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
         <log4j.version>2.25.3</log4j.version>
-        <spotless.version>2.33.0</spotless.version>
+        <spotless.version>2.46.1</spotless.version>
     </properties>
 
     <dependencies>
@@ -83,7 +83,7 @@ under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.15.0</version>
                 <configuration>
                     <source>${target.java.version}</source>
                     <target>${target.java.version}</target>
@@ -126,7 +126,7 @@ under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.6.2</version>
                 <executions>
                     <!-- Run shade goal on package phase -->
                     <execution>
