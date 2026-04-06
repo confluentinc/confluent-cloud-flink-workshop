@@ -34,7 +34,7 @@ under the License.
         <target.java.version>17</target.java.version>
         <maven.compiler.source>${target.java.version}</maven.compiler.source>
         <maven.compiler.target>${target.java.version}</maven.compiler.target>
-        <log4j.version>2.25.3</log4j.version>
+        <log4j.version>2.25.4</log4j.version>
         <spotless.version>2.46.1</spotless.version>
     </properties>
 
