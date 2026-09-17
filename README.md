@@ -207,23 +207,3 @@ In `demo-infrastructure` run the following commands to destroy the whole demo en
 ```bash
 terraform destroy --auto-approve
 ```
-
-## Instructor / WSA (operators)
-
-To deliver this workshop to many attendees at once, it is onboarded to the
-[Workshop Setup Accelerator (WSA)](https://github.com/confluentinc/workshop-setup-accelerator),
-which pre-provisions per-attendee Confluent Cloud environments and dispenses
-credentials on a first-come, first-served basis.
-
-- **Spec:** [`wsa-spec-aws.yaml`](./wsa-spec-aws.yaml) (`cloud: AWS`, one `per_account` phase).
-- **Terraform:** [`terraform/`](./terraform) — a WSA-specific tree, separate from the
-  single-tenant [`demo-infrastructure/`](./demo-infrastructure). The reusable Confluent
-  Cloud + Flink resources live in `terraform/modules/confluent-flink-marketplace`;
-  the per-account root `terraform/aws` calls the module and adds attendee
-  `EnvironmentAdmin` RBAC (so each attendee can log into the Confluent Cloud UI) and
-  the WSA output contract (`cc_environment_url`, `cc_environment_id`, …).
-- **Isolation:** each attendee gets their own Confluent Cloud environment; there is
-  no shared infrastructure.
-- **Operate a run:** the operator steps for building, dispensing, and tearing down
-  a WSA delivery of this workshop aren't documented publicly. If you want to run it
-  on WSA, contact the maintainers / Confluent TMM.
