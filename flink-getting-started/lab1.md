@@ -11,7 +11,10 @@ The below is the full architecture of what we will build in both labs.
 
 ## Prerequisites
 
-All required resources in Confluent Cloud must be already created for this lab to work correctly. If you haven't already, please follow the [Demo environment setup](../README.md).
+All required resources in Confluent Cloud must be already created for this lab to work correctly.
+
+- **Attending an instructor-led workshop?** Your account is pre-provisioned — start with [Lab 0: Getting Started (Instructor-Led Workshop)](lab0-workshop-setup.md) to claim your account and log in, then return here.
+- **Running this on your own?** Follow the [Demo environment setup](../README.md) first.
 
 ## Content of Lab 1
 
@@ -133,7 +136,7 @@ Following mappings exist:
 We will now work in the default SQL Workpace using `default` Flink Compute Pool:
 
 
-Make sure you set with the right default  catalog (=environment) and database (=`marketplace`).
+Make sure you set the correct `catalog` (your confluent environment) and `database` (your confluent cluster *marketplace*).
 
 ![image](img/sql_workspace.png)
 
@@ -229,9 +232,21 @@ SELECT * FROM orders;
 We need to make sure that there are no duplicated in the orders stream. We do not want to process an order twice. Let's check if we have any duplicates.
 
 ```sql
-SELECT order_id, COUNT(*) FROM orders GROUP BY order_id;
+SELECT order_id, occurrences
+FROM (
+  SELECT
+    order_id,
+    COUNT(*) AS occurrences,
+    ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS rownum
+  FROM orders
+  GROUP BY order_id
+)
+WHERE rownum <= 20;
 ```
-The above Flink query counts the number of rows for each unique `order_id` in the `orders` table. The output shows that several `order_id` values appear more than once, indicating duplicates in the table. Let’s address this issue.
+
+The above Flink query counts the number of rows for each unique `order_id` in the `orders` table, sorted so the most duplicated `order_id` values appear first. The output shows that several `order_id` values appear more than once, indicating duplicates in the table. Let’s address this issue.
+
+>NOTE: Streaming Flink SQL only allows `ORDER BY` on a time attribute, since a plain column could keep re-sorting forever as new rows arrive. The `ROW_NUMBER() OVER (ORDER BY ...)` pattern above is Flink's supported Top-N approach for sorting by a regular column in a streaming query.
 
 ```sql
 SELECT 
