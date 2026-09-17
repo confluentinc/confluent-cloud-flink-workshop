@@ -1,6 +1,6 @@
 resource "confluent_tag" "pii" {
-  name = "PII"
-  description = "Personal Identifiable Information"
+  name        = "PII"
+  description = "Personally Identifiable Information"
 
   schema_registry_cluster {
     id = data.confluent_schema_registry_cluster.sr.id
@@ -18,7 +18,7 @@ resource "confluent_tag" "pii" {
 }
 
 resource "confluent_tag" "public" {
-  name = "public"
+  name        = "public"
   description = "company-public streams"
 
   schema_registry_cluster {
@@ -37,7 +37,7 @@ resource "confluent_tag" "public" {
 }
 
 resource "confluent_tag" "private" {
-  name = "private"
+  name        = "private"
   description = "private streams"
 
   schema_registry_cluster {
@@ -74,7 +74,7 @@ resource "confluent_tag_binding" "customers-pii" {
 
   depends_on = [
     confluent_flink_statement.customers,
-    confluent_tag.pii, 
+    confluent_tag.pii,
     confluent_role_binding.env-admin,
     confluent_api_key.schema-registry-api-key
   ]
@@ -97,9 +97,8 @@ resource "confluent_tag_binding" "customers-private" {
 
   depends_on = [
     confluent_flink_statement.customers,
-    confluent_tag.private, 
+    confluent_tag.private,
     confluent_role_binding.env-admin,
-    confluent_api_key.schema-registry-api-key,
     confluent_api_key.schema-registry-api-key
   ]
 }
@@ -119,9 +118,9 @@ resource "confluent_tag_binding" "clicks-private" {
   entity_name = "${data.confluent_schema_registry_cluster.sr.id}:${confluent_kafka_cluster.marketplace.id}:clicks"
   entity_type = "kafka_topic"
 
-  depends_on =[
+  depends_on = [
     confluent_flink_statement.clicks,
-    confluent_tag.private, 
+    confluent_tag.private,
     confluent_role_binding.env-admin,
     confluent_api_key.schema-registry-api-key
   ]
@@ -142,9 +141,9 @@ resource "confluent_tag_binding" "products-public" {
   entity_name = "${data.confluent_schema_registry_cluster.sr.id}:${confluent_kafka_cluster.marketplace.id}:products"
   entity_type = "kafka_topic"
 
-  depends_on =[
+  depends_on = [
     confluent_flink_statement.products,
-    confluent_tag.public, 
+    confluent_tag.public,
     confluent_role_binding.env-admin,
     confluent_api_key.schema-registry-api-key
   ]
@@ -167,7 +166,7 @@ resource "confluent_tag_binding" "orders-private" {
 
   depends_on = [
     confluent_flink_statement.orders-create-table,
-    confluent_tag.private, 
+    confluent_tag.private,
     confluent_role_binding.env-admin,
     confluent_api_key.schema-registry-api-key
   ]
@@ -190,7 +189,7 @@ resource "confluent_tag_binding" "payments-private" {
 
   depends_on = [
     confluent_flink_statement.payments-create-table,
-    confluent_tag.private, 
+    confluent_tag.private,
     confluent_role_binding.env-admin,
     confluent_api_key.schema-registry-api-key
   ]

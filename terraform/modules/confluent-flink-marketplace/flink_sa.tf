@@ -23,7 +23,7 @@ resource "confluent_role_binding" "flink-developer-sa-flink-developer" {
 }
 
 resource "confluent_role_binding" "app-manager-assigner" {
- principal   = "User:${confluent_service_account.flink-developer-sa.id}"
+  principal   = "User:${confluent_service_account.flink-developer-sa.id}"
   role_name   = "Assigner"
   crn_pattern = "${data.confluent_organization.my_org.resource_name}/service-account=${confluent_service_account.flink-app.id}"
 }
@@ -59,7 +59,7 @@ data "confluent_schema_registry_cluster" "env" {
   environment {
     id = confluent_environment.env.id
   }
-  depends_on = [ 
+  depends_on = [
     confluent_kafka_cluster.marketplace
   ]
 }

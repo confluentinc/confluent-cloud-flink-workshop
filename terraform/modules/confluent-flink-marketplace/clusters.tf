@@ -1,6 +1,6 @@
 ## Clusters
 
-## Flights Cluster
+## Marketplace Cluster
 
 resource "confluent_kafka_cluster" "marketplace" {
   display_name = "marketplace"

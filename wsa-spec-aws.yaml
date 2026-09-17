@@ -15,7 +15,7 @@
 # resources are factored into terraform/modules/confluent-flink-marketplace and
 # consumed by the per-account root terraform/aws.
 
-# wsa release this spec requires. Caret on a 0.x floor resolves to >=0.3.0 <0.4.0.
+# The wsa version this spec requires. Caret on a 0.x floor resolves to >=0.3.0 <0.4.0.
 wsa_version: "^0.3.0"
 
 name: confluent-flink-marketplace-aws
