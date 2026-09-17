@@ -2,21 +2,95 @@
 
 # Flink Confluent Cloud for Apache Flink Online Store Workshop
 
-This repository sets up the necessary infrastructure for the Confluent Cloud: Getting Started with Apache Flink workshop. It simulates data for a third-party reseller offering products from major vendors like Amazon and Walmart.
+**Duration**: ~60–90 minutes (Labs 1–2 ~60 min; add ~35 min for the optional Tableflow labs)
 
-During the workshop, you'll use Confluent Cloud for Apache Flink to clean, transform, and join the data, ultimately creating several data products. Below is the architecture of what you'll build.
+**Difficulty**: Beginner–Intermediate
+
+**Technical Requirements**: Basic SQL. For the self-service path you also need a Confluent Cloud account, Terraform, and Git. The Tableflow labs additionally require access to an AWS account.
+
+**Workshop Type**: This workshop runs in two modes — pick the one that matches your situation:
+
+- [🎓 Instructor-Led](#-instructor-led) — your account is pre-provisioned; just claim it and start querying.
+- [🛠️ Self-Service](#️-self-service) — provision your own environment with Terraform.
+
+## 📖 Overview
+
+This workshop simulates data for a third-party reseller offering products from major vendors like Amazon and Walmart. You'll use Confluent Cloud for Apache Flink to clean, transform, and join streaming data, ultimately creating several data products. Below is the architecture of what you'll build in Labs 1 and 2.
 
 ![lab 1 and 2 architecture](flink-getting-started/img/architecture_lab2.png)
 
-In labs 3 and 4, you will then sync these data products to Amazon S3 in Apache Iceberg format using Tableflow. Below is the architecture:
+In Labs 3 and 4 (optional), you sync these data products to Amazon S3 in Apache Iceberg format using Tableflow, and query them with AWS Athena:
 
 ![lab 3 and 4 architecture](tableflow-labs/img/lab-3-and-4-architecture.png)
 
-## General Requirements
+## 🗄 Datasets
+
+All topics are generated inside your environment by Flink data-generation statements (sourced from Confluent's `examples.marketplace` catalog) — you don't produce them yourself.
+
+| Topic | Description |
+|-------|-------------|
+| `clicks` | Customer clicks, including product and action details |
+| `customers` | Customer CRM data (contains PII) |
+| `customer_inquiries` | Customer inquiries associated with orders |
+| `order_status` | Order status: `CREATED`, `PAID`, `SHIPPED`, `DELIVERED` |
+| `orders` | Real-time order transactions (billing system) |
+| `payments` | Payments, associated with specific orders |
+| `products` | Product catalog data |
+
+## 🔬 Workshop Labs
+
+Choose the path that matches your situation. The hands-on Flink SQL labs (Lab 1 onward) are **identical** across modes — only how you get an environment differs.
+
+### 🎓 Instructor-Led
+
+> Your Confluent Cloud environment — Kafka cluster, topics, Schema Registry, Flink pools, and streaming data — is **pre-provisioned**. 
+>
+> You claim an account, log in, and go straight to writing Flink SQL. Use this path only when directed by your workshop instructor.
+
+| Lab | Duration | Details |
+|-----|----------|---------|
+| [Lab 0: Account Setup](./flink-getting-started/lab0-workshop-setup.md) | ~5 min | **Claim your account**: log in to Confluent Cloud, verify your resources, open the Flink SQL Workspace. |
+| [Lab 1: Getting Started with Flink](./flink-getting-started/lab1.md) | ~30 min | **Explore and query**: tables, select queries, deduplication, aggregations, time windows, Flink jobs. |
+| [Lab 2: Data Products](./flink-getting-started/lab2.md) | ~30 min | **Build data products**: promotions and loyalty levels with advanced Flink features. |
+| [Lab 3: Enable Tableflow](./tableflow-labs/lab3.md) *(optional, needs AWS)* | ~20 min | **Sync to S3**: configure AWS + Confluent, publish topics as Iceberg tables. |
+| [Lab 4: Query with Athena](./tableflow-labs/lab4.md) *(optional, needs AWS)* | ~15 min | **Query Iceberg**: read the Tableflow-synced tables from AWS Athena. |
+
+### 🛠️ Self-Service
+
+> Fully hands-on: you provision your own Confluent Cloud environment with Terraform, then run the same Flink SQL labs. Use this to learn how to run the pipeline in your own Confluent Cloud org.
+>
+> Terraform: [`demo-infrastructure/`](./demo-infrastructure) (single-tenant). Setup steps below.
+
+| Lab | Duration | Details |
+|-----|----------|---------|
+| [Setup: Deploy with Terraform](#self-service-setup-terraform) | ~10 min | **Provision your environment**: API keys, `terraform apply`, `source env.sh`. |
+| [Lab 1: Getting Started with Flink](./flink-getting-started/lab1.md) | ~30 min | **Explore and query**: tables, select queries, deduplication, aggregations, time windows, Flink jobs. |
+| [Lab 2: Data Products](./flink-getting-started/lab2.md) | ~30 min | **Build data products**: promotions and loyalty levels with advanced Flink features. |
+| [Lab 3: Enable Tableflow](./tableflow-labs/lab3.md) *(optional, needs AWS)* | ~20 min | **Sync to S3**: configure AWS + Confluent, publish topics as Iceberg tables. |
+| [Lab 4: Query with Athena](./tableflow-labs/lab4.md) *(optional, needs AWS)* | ~15 min | **Query Iceberg**: read the Tableflow-synced tables from AWS Athena. |
+| [Teardown](#tear-down-self-service) | ~5 min | **Clean up**: `terraform destroy` to remove all billable resources. |
+
+> [!WARNING]
+> **Prerequisites and cost**
+>
+> The **self-service** path runs `terraform apply`, which creates billable Confluent Cloud resources — run the [teardown](#tear-down-self-service) when you finish. The **Tableflow labs (3–4)** sync to Amazon S3 and have you create an S3 bucket + IAM role, so they require access to an AWS account. Instructor-led attendees are provisioned a Confluent Cloud environment only — check with your instructor whether the Tableflow labs are included.
+
+
+### Additional Resources
+
+- **[Flink Monitoring Dashboard](./flink-monitoring/README.md)** — optional Docker-based dashboard to visualize Flink jobs and Confluent Cloud metrics (both modes).
+
+---
+
+## Self-Service Setup (Terraform)
+
+> This section applies to the **self-service** path only. Instructor-led attendees start at [Lab 0](./flink-getting-started/lab0-workshop-setup.md).
+
+### Requirements
 
 * **Confluent Cloud API Keys** - [Cloud resource management API Keys](https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/service-accounts/api-keys/overview.html#resource-scopes) with Organisation Admin permissions
-* **Terraform (v1.9.5+)** - The demo resources is automatically created using [Terraform](https://www.terraform.io).
-* **Git CLI** - Git CLI to clone the repo 
+* **Terraform (v1.9.5+)** - The demo resources are automatically created using [Terraform](https://www.terraform.io).
+* **Git CLI** - Git CLI to clone the repo
 * **Confluent CLI** - Confluent CLI if Flink shell will be used.
 * **Docker and Docker Compose** - Required if you want to run the optional Flink monitoring dashboard
 
@@ -52,10 +126,8 @@ winget install --id Docker.DockerDesktop -e
 ```
 winget install --id ConfluentInc.Confluent-CLI -e
 ```
-</details> 
+</details>
 
-
-## Setup
 
 <details>
 <summary>Mac Setup</summary>
@@ -126,19 +198,9 @@ call env.bat
 ```
 </details>
 
-## Labs
+When setup completes, continue to **[Lab 1: Getting Started with Flink](./flink-getting-started/lab1.md)**.
 
-**Next Lab:** [Lab 1: Getting Started with Flink](./flink-getting-started/lab1.md)
-
-## Optional: Flink Monitoring Dashboard
-
-After completing the workshop setup, you can optionally set up a monitoring dashboard to visualize your Flink jobs and Confluent Cloud metrics:
-
-**Monitoring Setup:** [Flink Monitoring Dashboard](./flink-monitoring/README.md)
-
-
-
-## Tear down
+## Tear down (self-service)
 
 In `demo-infrastructure` run the following commands to destroy the whole demo environment
 
