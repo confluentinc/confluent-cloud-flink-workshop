@@ -3,6 +3,11 @@
 # ===============================
 # Each credential field with `source: terraform` in wsa-spec-aws.yaml maps to a
 # root output here by name.
+#
+# TODO(wsa): this spec<->output contract is verified only by hand. Add a check
+# (script or CI step) asserting every `output:` under credentials in
+# wsa-spec-aws.yaml has a matching root output here, so a rename can't silently
+# break a dispenser run.
 
 output "cc_environment_url" {
   description = "WSA: Confluent Cloud console URL for this attendee's environment"

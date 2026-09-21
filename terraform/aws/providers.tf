@@ -1,3 +1,6 @@
+# TODO(wsa): .terraform.lock.hcl currently pins only darwin_arm64 hashes. Before
+# operators run on Linux, add other platforms:
+#   terraform providers lock -platform=linux_amd64 -platform=darwin_arm64
 terraform {
   required_providers {
     confluent = {

@@ -1,5 +1,11 @@
 # Data-generation Flink statements.
 #
+# TODO(wsa): these statements' .tf and statements/*.sql are duplicated verbatim
+# from demo-infrastructure/. Unify to a single source (have demo-infrastructure
+# consume this module, or share one statements/ dir), then fix the copied-in SQL
+# nits in one place: inconsistent backtick quoting of `orders` and the misspelled
+# CTE `order_fullfilment_base` in statements/orders-payments-order_status-datagen.sql.
+#
 # WSA hardening vs. the single-tenant demo: `confluent_flink_statement` creates
 # are non-idempotent and the provider waits for the statement to reach RUNNING.
 # If that create succeeds server-side but errors client-side (a transient blip,
